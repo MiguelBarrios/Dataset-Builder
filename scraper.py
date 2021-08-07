@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from DogPileScraper import *
 import os
+from twilio.rest import Client
+from config import *
 
 class Scraper:
 	def __init__(self, search_engine):
@@ -27,3 +29,14 @@ class Scraper:
 
 		images_found = self.search_engine.find_image_links(self.driver, search_query, output_directory)
 		print(images_found)
+
+def send_RECapture_alert():
+	client = Client(config.SID, config.AUTH_TOKEN)
+	message_content = 'Handel reCAPTCHA'
+	message = client.messages.create(
+	                              body= message_content
+	                              from_= config.FROM_NUMBER,
+	                              to= config.MY_NUMBER
+	                          )
+	print(message.sid)
+
