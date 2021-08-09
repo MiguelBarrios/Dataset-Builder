@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from DogPileScraper import *
+from YahooScraper import *
 import os
 from twilio.rest import Client
 from config import *
@@ -22,20 +23,20 @@ class Scraper:
 		elif search_engine == 'DuckDuckGo':
 			return DuckDuckGoScraper()
 	#
-	def seach_and_save(self, search_query, output_directory):
+	def search_and_save(self, search_query, output_directory):
+		print("Scraper.search_and_save()")
 		# create directory if not present
 		if not os.path.exists(output_directory):
 			os.makedirs(output_directory)
-
-		images_found = self.search_engine.find_image_links(self.driver, search_query, output_directory)
+		images_found = self.search_engine.search_and_save(self.driver, search_query, output_directory)
 		print(images_found)
 
 def send_RECapture_alert():
 	client = Client(config.SID, config.AUTH_TOKEN)
 	message_content = 'Handel reCAPTCHA'
 	message = client.messages.create(
-	                              body= message_content
-	                              from_= config.FROM_NUMBER,
+	                              body= message_content,
+	                              from_ = config.FROM_NUMBER,
 	                              to= config.MY_NUMBER
 	                          )
 	print(message.sid)
