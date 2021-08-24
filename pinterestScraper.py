@@ -15,9 +15,14 @@ class PinterestScraper:
     def __init__(self):
         self.domain = 'https://www.pinterest.com/'
         self.driver = WebDriver.getInstance()
-        self.load_home_page()
-        self.log_in()
+        if not WebDriver.logged_in():
+            print("Logging in")
+            self.load_home_page()
+            self.log_in()
+            WebDriver.toggle_log_in_flag()
     def run_search(self, search_query, n, output_dir):
+        print("Scraping Pinterest")
+        self.load_home_page()
         images_found = self.run_search_query(search_query, n)
         num_images_saved = save_images(images_found, output_dir)
         return num_images_saved

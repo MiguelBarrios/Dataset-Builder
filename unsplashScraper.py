@@ -15,9 +15,11 @@ class UnsplashScraper:
     def __init__(self):
         self.domain = 'https://unsplash.com/'
         self.driver = WebDriver.getInstance()
+
+    def run_search(self, search_query, n, output_dir):
+        print("Scraping Unsplash")
         # load home page
         self.driver.get(self.domain)
-    def run_search(self, search_query, n, output_dir):
         # clear search bar and enter search query
         search_bar = self.driver.find_element_by_name('searchKeyword')
         clear(search_bar, self.driver)

@@ -18,8 +18,6 @@ class YahooScraper:
     def reset(self):
         self.driver.get(self.image_search_url)
     def run_search(self, search_query, n, output_dir):
-        label = "serach request [search query:{}, n: {}, output directory: {}]"
-        print(label.format(search_query, n, output_dir))
         self.reset()
         # get seach bar
         search_bar = self.driver.find_element_by_name("p")
@@ -67,7 +65,7 @@ class YahooScraper:
             containers = soup.find_all("li", {"class":"ld"})
         return images
     def load_all_results(self):
-        print("finding results.", end = "")
+        print("finding images.", end = "")
         while True:    
             try:
                 load_more_btn = self.driver.find_element_by_name('more-res')
@@ -75,4 +73,3 @@ class YahooScraper:
                 print(".", end = "")
             except Exception as e:
                 break
-        print(" FINISHED")
