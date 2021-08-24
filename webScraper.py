@@ -18,11 +18,11 @@ class WebScraper:
             self.unsplashScraper.run_search(search_query, n, output_dir)        
     def run_multiple_searches(self, search_queries, n, parent_dir):
         if self.yahooScraper != None:
-            self.__run_searches(self.yahooScraper, search_queries, n, output_dir)
+            self.__run_searches(self.yahooScraper, search_queries, n, parent_dir)
         if self.pinterestScraper != None:
-            self.__run_searches(self.pinterestScraper, search_queries, n, output_dir)
+            self.__run_searches(self.pinterestScraper, search_queries, n, parent_dir)
         if self.unsplashScraper != None:
-            self.__run_searches(self.unsplashScraper, search_queries, n, output_dir)
+            self.__run_searches(self.unsplashScraper, search_queries, n, parent_dir)
     def __run_searches(self, scraper, search_queries, n, parent_dir):
         for search_query in search_queries:
             output_dir = parent_dir + search_query
