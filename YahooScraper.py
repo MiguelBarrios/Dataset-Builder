@@ -8,12 +8,13 @@ from util import *
 import time
 from util import * 
 import random
+from webdriver import *
 
 class YahooScraper:
-    def __init__(self, driver):
+    def __init__(self):
         self.search_engine_domain = 'https://yahoo.com'
         self.image_search_url = 'https://images.search.yahoo.com/'
-        self.driver = driver
+        self.driver = WebDriver.getInstance()
     def reset(self):
         self.driver.get(self.image_search_url)
     def run_search(self, search_query, n, output_dir):
@@ -66,7 +67,7 @@ class YahooScraper:
             containers = soup.find_all("li", {"class":"ld"})
         return images
     def load_all_results(self):
-        print("loading results.", end = "")
+        print("finding results.", end = "")
         while True:    
             try:
                 load_more_btn = self.driver.find_element_by_name('more-res')

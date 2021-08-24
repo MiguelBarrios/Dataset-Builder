@@ -9,11 +9,12 @@ import re
 from config import *
 from util import *
 import os, os.path
+from webdriver import *
 
 class PinterestScraper:
-    def __init__(self, driver):
+    def __init__(self):
         self.domain = 'https://www.pinterest.com/'
-        self.driver = driver
+        self.driver = WebDriver.getInstance()
         self.load_home_page()
         self.log_in()
     def run_search(self, search_query, n, output_dir):
